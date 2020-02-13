@@ -70,6 +70,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        # 아래에서 선언한 함수를 사용 할 수도 있다.
         "count_amenities",
         "count_photos",
         "total_rating",
@@ -78,6 +79,7 @@ class RoomAdmin(admin.ModelAdmin):
     # 리스트페이지 우측에 필터를 할 필드를 설정한다.
     list_filter = (
         "instant_book",
+        # 외래키 접근
         "host__superhost",
         "room_type",
         "amenities",
@@ -89,6 +91,8 @@ class RoomAdmin(admin.ModelAdmin):
 
     raw_id_fields = ("host",)
 
+    # 검색 필드를 지정 할 수 있다.
+    # 앞의 문자로 비교
     search_fields = ("=city", "^host__username")
 
     filter_horizontal = ("amenities", "facilities", "house_rules")
