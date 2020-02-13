@@ -13,6 +13,7 @@ class AbstractItem(core_models.TimeStampedModel):
     name = models.CharField(max_length=80)
 
     class Meta:
+        # abstract 클래스로 만든다.
         abstract = True
 
     def __str__(self):
@@ -59,6 +60,8 @@ class Photo(core_models.TimeStampedModel):
 
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="room_photos")
+    # related_name으로 ForeignKey 일때는 .room_set 으로 접근하는걸 해당 값으로 대체한다.
+    # 여기서는 .photos
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -88,6 +91,8 @@ class Room(core_models.TimeStampedModel):
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
+    # ManyToManyField에서 related_name을 지정하면, 해당 이름으로 역으로 접근 가능 하다.
+    # amenities.rooom
     amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
