@@ -95,6 +95,7 @@ class RoomAdmin(admin.ModelAdmin):
     # 앞의 문자로 비교
     search_fields = ("=city", "^host__username")
 
+    # ManyToMany 관계에서 박스 2개를 보이게 하는 UI 출력
     filter_horizontal = ("amenities", "facilities", "house_rules")
 
     def count_amenities(self, obj):
