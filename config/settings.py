@@ -25,12 +25,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("DJANGO_SECRET", "NTfF6fEHnYx^P6@HJx@K6M")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# 환경변수 로 디버그 
 DEBUG = bool(os.environ.get("DEBUG"))
 
 ALLOWED_HOSTS = [".elasticbeanstalk.com", "localhost"]
 
 
 # Application definition
+# 3가지로 나눠서 지정
 
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -89,7 +91,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+# 디버그 모드에 따라 데이터베이스 구분
 if DEBUG:
 
     DATABASES = {
@@ -99,7 +101,7 @@ if DEBUG:
         }
     }
 else:
-
+    # 데이터베이스 정보를 환경변수로 
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
