@@ -10,14 +10,18 @@ from django.template.loader import render_to_string
 from core import managers as core_managers
 
 
+# 장고 User모델 상속받아 확장하기
 class User(AbstractUser):
 
     """ Custom User Model """
 
+    # 상수 지정
     GENDER_MALE = "male"
     GENDER_FEMALE = "female"
     GENDER_OTHER = "other"
 
+    # choices 지정 -> 관리자에서 select box로 보이게 만든다.
+    # _("Male") 은 보여지는 내용이다. 앞의 '_'는 뭔지 아직 
     GENDER_CHOICES = (
         (GENDER_MALE, _("Male")),
         (GENDER_FEMALE, _("Female")),
@@ -47,6 +51,7 @@ class User(AbstractUser):
         (LOGING_KAKAO, "Kakao"),
     )
 
+    # blank=True 이면 필수 입력 아니게 설정된다.
     first_name = models.CharField(
         _("first name"), max_length=30, blank=True, default="Unnamed User"
     )
