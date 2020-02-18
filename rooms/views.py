@@ -162,6 +162,7 @@ def delete_photo(request, room_pk, photo_pk):
         else:
             models.Photo.objects.filter(pk=photo_pk).delete()
             messages.success(request, "Photo Deleted")
+        # 리다이렉트 할 때, 경로를 reserve("app이름:url이름(name), kwargs={파라메터})
         return redirect(reverse("rooms:photos", kwargs={"pk": room_pk}))
     except models.Room.DoesNotExist:
         return redirect(reverse("core:home"))
