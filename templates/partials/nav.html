@@ -2,6 +2,7 @@
 <ul class="flex items-center text-sm font-medium h-full">
     {% if user.is_authenticated %}
         <li class="nav_link">
+            # 링크 걸때, 아래와 같이 url 'app이름:url링크 이름(name지정한것)
             <a href="{% url 'users:switch-hosting' %}">
                 {% if request.session.is_hosting %}
                     {% trans "Stop hosting" %}
